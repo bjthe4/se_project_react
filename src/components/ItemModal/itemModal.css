@@ -1,0 +1,33 @@
+.modal__image {
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.modal__content_type_image {
+  padding: 0;
+}
+
+.modal__caption {
+  padding: 0 0 0 32px;
+  font-size: 20px;
+  line-height: 24px;
+  margin: 20px 0px 0px 0px;
+}
+
+.modal__weather {
+  font-weight: 700;
+  padding: 0 0 0 32px;
+  font-size: 20px;
+  line-height: 24px;
+  margin: 12px 0 32px 0;
+}
+
+.modal__close_type_close {
+  background-color: #e9e9e9;
+}
+
+.modal__close_type_close:hover {
+  background-color: #e9e9e9;
+}

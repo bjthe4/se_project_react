@@ -9,8 +9,18 @@
   position: absolute;
   top: 15px;
   margin: 0;
+  background: #fff;
+  height: 24px;
+  border-radius: 4px;
+  padding: 2px 12px 2px 12px;
+  object-fit: fill;
+  font-size: 16px;
+  line-height: 20px;
+  color: #00000099;
+  text-align: center;
 }
 
 .card__image {
   width: 100%;
+  cursor: pointer;
 }

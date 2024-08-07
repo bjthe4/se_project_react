@@ -1,7 +1,7 @@
 import React from "react";
 import "./WeatherCard.css";
 import Cloudy from "../../assets/day/Cloudy.png";
-import { weatherOptions } from "../../utils/constants";
+import { weatherOptions, defaultWeatherOptions } from "../../utils/constants";
 
 function WeatherCard({ weatherData }) {
   const filteredOptions = weatherOptions.filter((option) => {
@@ -11,13 +11,18 @@ function WeatherCard({ weatherData }) {
     );
   });
 
-  const weatherOption = filteredOptions[0];
+  let weatherOption;
+  if (filteredOptions.length === 0) {
+    weatherOption = defaultWeatherOptions[weatherData.isDay ? "day" : "night"];
+  } else {
+    weatherOption = filteredOptions[0];
+  }
 
   return (
     <section className="weather-card">
       <p className="weather-card__temp">{weatherData.temp.F} &deg;F</p>
       <img
-        src={weatherOption?.Url}
+        src={weatherOption?.url}
         alt={`Card showing ${weatherOption?.day ? "day" : "night"}time ${
           weatherOption?.condition
         } weather`}

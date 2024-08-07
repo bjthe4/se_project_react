@@ -7,8 +7,32 @@ export const weatherOptions = [
 
   {
     day: true,
-    condition: "cloudy",
+    condition: "clouds",
     url: new URL("../assets/day/Cloudy.png", import.meta.url).href,
+  },
+
+  {
+    day: true,
+    condition: "raining",
+    url: new URL("../assets/day/raining.png", import.meta.url).href,
+  },
+
+  {
+    day: true,
+    condition: "storm",
+    url: new URL("../assets/night/storm.png", import.meta.url).href,
+  },
+
+  {
+    day: false,
+    condition: "storm",
+    url: new URL("../assets/night/stormN.png", import.meta.url).href,
+  },
+
+  {
+    day: false,
+    condition: "raining",
+    url: new URL("../assets/night/rainingN.png", import.meta.url).href,
   },
 
   {
@@ -19,10 +43,19 @@ export const weatherOptions = [
 
   {
     day: false,
-    condition: "cloudy",
+    condition: "clouds",
     url: new URL("../assets/night/cloudyN.png", import.meta.url).href,
   },
 ];
+
+export const defaultWeatherOptions = {
+  day: {
+    url: new URL("../assets/day/default.png", import.meta.url).href,
+  },
+  night: {
+    url: new URL("../assets/day/defaultN.png", import.meta.url).href,
+  },
+};
 
 export const defaultClothingItems = [
   {
