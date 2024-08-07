@@ -23,4 +23,6 @@
 .card__image {
   width: 100%;
   cursor: pointer;
+  border-radius: 10px;
+  border: solid #0000004d;
 }
