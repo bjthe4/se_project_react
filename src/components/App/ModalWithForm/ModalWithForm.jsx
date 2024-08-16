@@ -1,7 +1,15 @@
 import "./ModalWithForm.css";
 import close from "../../../assets/Union.png";
 
-function ModalWithForm({ children, buttonText, title, onClose, isOpened }) {
+function ModalWithForm({
+  children,
+  buttonText,
+  title,
+  onClose,
+  isOpened,
+  isOpen,
+  onSubmit,
+}) {
   return (
     <div className={`modal ${isOpened && "modal_opened"}`}>
       <div className="modal__content">
@@ -9,7 +17,7 @@ function ModalWithForm({ children, buttonText, title, onClose, isOpened }) {
         <button onClick={onClose} type="button" className="modal__close">
           <img src={close} alt="close" />
         </button>
-        <form className="modal__form">
+        <form className="modal__form" onSubmit={onSubmit}>
           {children}
           <button type="submit" className="modal__button">
             {buttonText}
