@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { Routes, Route } from "react-router-dom";
+// import profile from "../profile/profile";
 /*import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";*/
 import "./App.css";
@@ -35,8 +37,8 @@ function App() {
     setActiveModal("");
   };
 
-  const onAddItem = (e) => {
-    console.log(e);
+  const onAddItem = (values) => {
+    console.log(values);
   };
 
   const handleToggleSwitchChange = () => {
@@ -63,12 +65,23 @@ function App() {
       >
         <div className="page__content">
           <Header handleAddClick={handleAddClick} weatherData={weatherData} />
-          <Main weatherData={weatherData} handleCardClick={handleCardClick} />
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <Main
+                  weatherData={weatherData}
+                  handleCardClick={handleCardClick}
+                />
+              }
+            />
+            <Route path="/profile" element={<p>PROFILE</p>} />
+          </Routes>
         </div>
-        {}
+
         <AddItemModal
           closeActiveModal={closeActiveModal}
-          isopen={activeModal === "add-garment"}
+          isOpen={activeModal === "add-garment"}
           onAddItem={onAddItem}
         />
         <ItemModal
