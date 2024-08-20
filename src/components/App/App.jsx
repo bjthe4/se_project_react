@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
-// import profile from "../profile/profile";
+import Profile from "../Profile/Profile";
 /*import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";*/
 import "./App.css";
@@ -13,6 +13,7 @@ import { getWeather, filterWeatherData } from "../../utils/weatherApi";
 import Footer from "../Footer/Footer";
 import { CurrentTemperatureUnitContext } from "../../context/CurrentTemperatureUnitContext";
 import AddItemModal from "../AddItemsModal/AddItemModal";
+import { getItems } from "../../utils/api";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -22,6 +23,8 @@ function App() {
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
   const [currentTemperatureUnit, securrentTemperatureUnit] = useState("F");
+  const [clothingItems, setClothingItems] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleCardClick = (card) => {
     setActiveModal("preview");
@@ -31,6 +34,10 @@ function App() {
   const handleAddClick = () => {
     console.log("Add Clothes clicked");
     setActiveModal("add-garment");
+  };
+
+  const handleAddItemSubmit = (e) => {
+    console.log(e);
   };
 
   const closeActiveModal = () => {
@@ -46,6 +53,11 @@ function App() {
     if (currentTemperatureUnit === "F") securrentTemperatureUnit("C");
   };
 
+  const handleDeleteClick = (card) => {
+    setActiveModal("delete-item");
+    setSelectedCard(card);
+  };
+
   useEffect(() => {
     getWeather(coordinates, APIkey)
       .then((data) => {
@@ -58,6 +70,15 @@ function App() {
 
   console.log(currentTemperatureUnit);
 
+  useEffect(() => {
+    getItems()
+      .then((data) => {
+        console.log(data);
+        setClothingItems(data);
+      })
+      .catch(console.error);
+  }, []);
+
   return (
     <div className="page">
       <CurrentTemperatureUnitContext.Provider
@@ -69,13 +90,24 @@ function App() {
             <Route
               path="/"
               element={
+                // pass clothingItems as a prop
                 <Main
                   weatherData={weatherData}
                   handleCardClick={handleCardClick}
+                  clothingItems={clothingItems}
                 />
               }
             />
-            <Route path="/profile" element={<p>PROFILE</p>} />
+            <Route
+              path="/profile"
+              element={
+                <Profile
+                  weatherData={weatherData}
+                  handleCardClick={handleCardClick}
+                  clothingItems={clothingItems}
+                />
+              }
+            />
           </Routes>
         </div>
 
@@ -88,6 +120,7 @@ function App() {
           activeModal={activeModal}
           card={selectedCard}
           onClose={closeActiveModal}
+          handleDeleteClick={handleDeleteClick}
         />
         <Footer />
       </CurrentTemperatureUnitContext.Provider>
