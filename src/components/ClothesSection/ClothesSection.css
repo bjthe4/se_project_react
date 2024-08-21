@@ -1,0 +1,7 @@
+.clothes-section {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.clothes-section-items {
+}

@@ -3,10 +3,11 @@ import ModalWithForm from "../App/ModalWithForm/ModalWithForm";
 
 function AddItemModal({
   closeActiveModal,
-  onAddItem,
+  //onAddItem,
   isOpen,
   activeModal,
   isLoading,
+  handleAddItem,
 }) {
   const [name, setName] = useState("");
   const handleNameChange = (e) => {
@@ -27,7 +28,7 @@ function AddItemModal({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onAddItem({ name, link });
+    handleAddItem({ name, weatherInput, link });
   };
 
   return (

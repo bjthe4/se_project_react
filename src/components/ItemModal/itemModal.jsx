@@ -1,9 +1,9 @@
 import "./itemModal.css";
 import close from "../../assets/Union1.png";
 
-function ItemModal({ activeModal, onClose, card, handleDeleteClick }) {
+function ItemModal({ onClose, card, handleDeleteClick }) {
   return (
-    <div className={`modal ${activeModal === "preview" && "modal_opened"}`}>
+    <div className="modal modal_opened">
       <div className="modal__content modal__content_type_image">
         <button
           onClick={onClose}
