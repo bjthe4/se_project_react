@@ -1,3 +1,3 @@
-function DeleteCardModal() {}
+// function DeleteCardModal() {}
 
-export default DeleteCardModal;
+// export default DeleteCardModal;
