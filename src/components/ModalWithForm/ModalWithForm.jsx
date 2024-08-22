@@ -1,5 +1,5 @@
 import "./ModalWithForm.css";
-import close from "../../../assets/Union.png";
+import close from "../../assets/Union.png";
 
 function ModalWithForm({
   children,

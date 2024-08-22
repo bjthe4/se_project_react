@@ -5,9 +5,9 @@ import Profile from "../Profile/Profile";
 import viteLogo from "/vite.svg";*/
 import "./App.css";
 import { coordinates, APIkey } from "../../utils/constants";
-import Header from "./Header/Header";
+import Header from "../Header/Header";
 import Main from "../Main/Main.jsx";
-import ModalWithForm from "./ModalWithForm/ModalWithForm";
+import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import ItemModal from "../ItemModal/itemModal";
 import { getWeather, filterWeatherData } from "../../utils/weatherApi";
 import Footer from "../Footer/Footer";
@@ -24,7 +24,7 @@ function App() {
   });
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
-  const [currentTemperatureUnit, securrentTemperatureUnit] = useState("F");
+  const [currentTemperatureUnit, setcurrentTemperatureUnit] = useState("F");
   const [clothingItems, setClothingItems] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -38,9 +38,9 @@ function App() {
     setActiveModal("add-garment");
   };
 
-  const handleAddItemSubmit = (e) => {
-    console.log(e);
-  };
+  // const handleAddItemSubmit = (e) => {
+  //   console.log(e);
+  // };
 
   const closeActiveModal = () => {
     setActiveModal("");
@@ -52,21 +52,22 @@ function App() {
   };
   */
 
-  const handleAddItem = ({ name, weatherInput, link }) => {
-    console.log(name, weatherInput, link);
+  const handleAddItem = ({ name, weather, imageUrl }) => {
+    console.log(name, weather, imageUrl);
     api
-      .addItems(name, weatherInput, link)
+      .addItems(name, weather, imageUrl)
       .then((newItem) => {
         setClothingItems([newItem, ...clothingItems]);
 
-        onClose();
+        closeActiveModal();
+        resetInputs();
       })
       .catch((err) => console.log(err));
   };
 
   const handleToggleSwitchChange = () => {
-    if (currentTemperatureUnit === "C") securrentTemperatureUnit("F");
-    if (currentTemperatureUnit === "F") securrentTemperatureUnit("C");
+    if (currentTemperatureUnit === "C") setcurrentTemperatureUnit("F");
+    if (currentTemperatureUnit === "F") setcurrentTemperatureUnit("C");
   };
 
   const handleDeleteClick = (card) => {
@@ -144,7 +145,7 @@ function App() {
           closeActiveModal={closeActiveModal}
           isOpen={activeModal === "add-garment"}
           //onAddItem={onAddItem}
-          onClose={closeActiveModal}
+          // onClose={closeActiveModal}
           handleAddItem={handleAddItem}
         />
         {activeModal === "preview" && (

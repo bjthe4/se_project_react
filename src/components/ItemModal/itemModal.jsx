@@ -18,18 +18,18 @@ function ItemModal({ onClose, card, handleDeleteClick }) {
           className="modal__image"
         />
         <div className="modal__footer">
-          <button
-            className="modal__delete-item-button"
-            onClick={() => {
-              handleDeleteClick(card);
-            }}
-          >
-            {" "}
-            Delete button
-          </button>
           <h2 className="modal__caption">{card.name}</h2>
           <p className="modal__weather">Weather: {card.weather}</p>
         </div>
+        <button
+          className="modal__delete-item-button"
+          onClick={() => {
+            handleDeleteClick(card);
+          }}
+        >
+          {" "}
+          Delete item
+        </button>
       </div>
     </div>
   );

@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import ModalWithForm from "../App/ModalWithForm/ModalWithForm";
+import React, { useState, useEffect } from "react";
+import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
 function AddItemModal({
   closeActiveModal,
@@ -26,9 +26,21 @@ function AddItemModal({
     setWeatherInput(e.target.value);
   };
 
+  const resetInputs = () => {
+    setName("");
+    setWeatherInput("");
+    setUrl("");
+  };
+
+  useEffect(() => {
+    if (isOpen) {
+      resetInputs();
+    }
+  }, [isOpen]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleAddItem({ name, weatherInput, link });
+    handleAddItem({ name, weather: weatherInput, imageUrl: link, resetInputs });
   };
 
   return (
