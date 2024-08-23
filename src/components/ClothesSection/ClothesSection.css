@@ -23,6 +23,7 @@
   color: #00000099;
   margin: 20px;
   padding: 0;
+  cursor: pointer;
 }
 
 .clothes-section-items {
@@ -31,5 +32,6 @@
   padding: 0;
   list-style-type: none;
   gap: 20px;
+  flex-wrap: wrap;
   /* margin: 176px 0 124px 385px; */
 }
