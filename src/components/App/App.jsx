@@ -52,7 +52,7 @@ function App() {
   };
   */
 
-  const handleAddItem = ({ name, weather, imageUrl, resetInputs }) => {
+  const handleAddItem = ({ name, weather, imageUrl }) => {
     console.log(name, weather, imageUrl);
     api
       .addItems(name, weather, imageUrl)
@@ -60,7 +60,6 @@ function App() {
         setClothingItems([newItem, ...clothingItems]);
 
         closeActiveModal();
-        resetInputs();
       })
       .catch((err) => console.log(err));
   };
@@ -76,13 +75,13 @@ function App() {
   };
 
   const handleDeleteItem = (item) => {
-    handleDeleteClick();
+    // handleDeleteClick();
     api
       .removeItems(item._id)
       .then(() => {
         setClothingItems(clothingItems.filter((card) => card._id !== item._id));
 
-        onClose();
+        closeActiveModal();
       })
       .catch((err) => console.log(err));
   };
@@ -148,6 +147,7 @@ function App() {
           //onAddItem={onAddItem}
           onClose={closeActiveModal}
           handleAddItem={handleAddItem}
+          // resetInputs={resetInputs}
         />
         {activeModal === "preview" && (
           <ItemModal
