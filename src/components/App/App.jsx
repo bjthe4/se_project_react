@@ -52,7 +52,7 @@ function App() {
   };
   */
 
-  const handleAddItem = ({ name, weather, imageUrl }) => {
+  const handleAddItem = ({ name, weather, imageUrl, resetInputs }) => {
     console.log(name, weather, imageUrl);
     api
       .addItems(name, weather, imageUrl)
@@ -146,7 +146,7 @@ function App() {
           closeActiveModal={closeActiveModal}
           isOpen={activeModal === "add-garment"}
           //onAddItem={onAddItem}
-          // onClose={closeActiveModal}
+          onClose={closeActiveModal}
           handleAddItem={handleAddItem}
         />
         {activeModal === "preview" && (

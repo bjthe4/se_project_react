@@ -5,9 +5,12 @@ export const handleServerResponse = (res) => {
 };
 
 function getItems() {
-  return fetch(`${baseURL}/items`).then((res) => {
-    return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
-  });
+  return fetch(`${baseURL}/items`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  }).then(handleServerResponse);
 }
 
 function removeItems(id) {
