@@ -4,11 +4,20 @@ import avatar from "../../assets/Avatar.png";
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 import { Link } from "react-router-dom";
 
-function Header({ handleAddClick, weatherData }) {
+function Header({
+  handleAddClick,
+  weatherData,
+  userData,
+  handleAddRegistration,
+  handleShowLogin,
+}) {
   const currentDate = new Date().toLocaleString("default", {
     month: "long",
     day: "numeric",
   });
+
+  const myAvatar = userData.avatar || userData.name.charAt(0);
+  console.log(userData);
 
   return (
     <header className="header">
@@ -22,19 +31,34 @@ function Header({ handleAddClick, weatherData }) {
       <div className="Header__user-container">
         <ToggleSwitch />
         <div>
-          <button
+          {/* <button
             onClick={handleAddClick}
             type="button"
             className="header__add-clothes-btn"
           >
             + Add Clothes
+          </button> */}
+          <button
+            type="button"
+            className="header__sign-up"
+            onClick={handleAddRegistration}
+          >
+            Sign Up
+          </button>
+
+          <button
+            type="button"
+            className="header__log-in"
+            onClick={handleShowLogin}
+          >
+            Log In
           </button>
         </div>
 
-        <p className="Header__username">Benedict Iroha</p>
+        {/* <p className="Header__username">Benedict Iroha</p>
         <Link to="/profile" className="header__link">
           <img src={avatar} alt="Benedict Iroha" className="Header__avatar" />
-        </Link>
+        </Link> */}
       </div>
     </header>
   );

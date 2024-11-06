@@ -13,11 +13,12 @@ function getItems() {
   }).then(handleServerResponse);
 }
 
-function removeItems(id) {
+function removeItems(id, token) {
   return fetch(`${baseURL}/items/${id}`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
     },
   }).then(handleServerResponse);
 }
