@@ -9,6 +9,7 @@ function Main({
   weatherData,
   handleCardClick,
   clothingItems,
+  onCardLike,
 }) /*clothingItems delete handleCardClick, delete defaultClothingItems*/ {
   const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
   return (
@@ -30,6 +31,7 @@ function Main({
                   key={item._id}
                   item={item}
                   onCardClick={handleCardClick}
+                  onCardLike={onCardLike}
                 />
               );
             })}

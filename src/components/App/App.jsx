@@ -21,6 +21,9 @@ import api from "../../utils/api";
 import ProtectedRoute from "../../utils/ProtectedRoute";
 import LoginModal from "../LoginModal/LoginModal";
 import { CurrentUserContext } from "../../context/CurrentUserContext";
+import EditProfileModal from "../EditProfileModal/EditProfileModal";
+// import auth from "../../utils/auth";
+import * as auth from "../../utils/auth";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -134,12 +137,12 @@ function App() {
 
   const handleRegistration = ({ email, password, name, avatarUrl }) => {
     auth
-      .signup(email, password, name, avatarUrl)
+      .signUp(email, password, name, avatarUrl)
       .then(() => {
         setUserData(email, password, name, avatarUrl);
         setCurrentUser(email, password);
         setIsLoggedIn(true);
-        e.preventDefault();
+        // e.preventDefault();
         closeActiveModal();
         navigate("/profile");
       })
@@ -161,11 +164,37 @@ function App() {
       .then((data) => {
         console.log("this is the data", data);
         setIsLoggedIn(true);
-        e.preventDefault();
+        // e.preventDefault();
         closeActiveModal();
         navigate("/profile");
       })
       .catch(() => console.err("A login Error has occured", err));
+  };
+
+  const handleCardLike = ({ id, isLiked }) => {
+    const token = localStorage.getItem("jwt");
+    // Check if this card is not currently liked
+    !isLiked
+      ? // if so, send a request to add the user's id to the card's likes array
+        api
+          // the first argument is the card's id
+          .addCardLike(id, token)
+          .then((updatedCard) => {
+            setClothingItems((cards) =>
+              cards.map((item) => (item._id === id ? updatedCard : item))
+            );
+          })
+          .catch((err) => console.log(err))
+      : // if not, send a request to remove the user's id from the card's likes array
+        api
+          // the first argument is the card's id
+          .removeCardLike(id, token)
+          .then((updatedCard) => {
+            setClothingItems((cards) =>
+              cards.map((item) => (item._id === id ? updatedCard : item))
+            );
+          })
+          .catch((err) => console.log(err));
   };
 
   return (
@@ -178,7 +207,9 @@ function App() {
             <Header
               handleAddClick={handleAddClick}
               weatherData={weatherData}
+              userData={userData}
               handleAddRegistration={handleAddRegistration}
+              handleShowLogin={handleShowLogin}
             />
             <Routes>
               <Route
@@ -189,6 +220,7 @@ function App() {
                     weatherData={weatherData}
                     handleCardClick={handleCardClick}
                     clothingItems={clothingItems}
+                    handleCardLike={handleCardLike}
                   />
                 }
               />
@@ -231,6 +263,7 @@ function App() {
               card={selectedCard}
               onClose={closeActiveModal}
               handleDeleteClick={handleDeleteItem}
+              userData={userData}
               /* handleDeleteItem={handleDeleteItem} */
             />
           )}
@@ -245,6 +278,11 @@ function App() {
             isOpen={activeModal === "login-modal"}
             onClose={closeActiveModal}
             onSubmit={handleLogin}
+          />
+          <EditProfileModal
+            activeModal={EditProfileModal}
+            onClose={closeActiveModal}
+            handleAddItem={handleAddItem}
           />
         </CurrentTemperatureUnitContext.Provider>
       </div>

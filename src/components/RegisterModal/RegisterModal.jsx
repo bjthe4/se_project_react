@@ -3,10 +3,35 @@ import "./RegisterModal.css";
 import { Link } from "react-router-dom";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
-function RegisterModal({ onClose, isOpen, handleSubmit }) {
+function RegisterModal({ onClose, isOpen, onSubmit }) {
   if (!isOpen) {
     return null;
   }
+
+  const [email, setEmail] = useState("");
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const [password, setpassword] = useState("");
+  const handlePasswordChange = (e) => {
+    setpassword(e.target.value);
+  };
+
+  const [name, setName] = useState("");
+  const handleNameChange = (e) => {
+    setName(e.target.value);
+  };
+
+  const [avatarUrl, setAvatarUrl] = useState("");
+  const handleAvatarUrlChange = (e) => {
+    setAvatarUrl(e.target.value);
+  };
+
+  const handleSubmitRegisteration = (e) => {
+    e.preventDefault();
+    onSubmit({ email, password, name, avatarUrl });
+  };
 
   const [data, setData] = useState("");
 
@@ -16,7 +41,7 @@ function RegisterModal({ onClose, isOpen, handleSubmit }) {
       buttonText="Sign Up"
       onClose={onClose}
       isOpen={isOpen}
-      handleSubmit={handleSubmit}
+      onSubmit={handleSubmitRegisteration}
     >
       <label htmlFor="email" className="modal__label">
         Email *
@@ -26,7 +51,8 @@ function RegisterModal({ onClose, isOpen, handleSubmit }) {
           id="email"
           placeholder="Email"
           name="email"
-          value={data.email}
+          value={email}
+          onChange={handleEmailChange}
         />
       </label>
       <label htmlFor="password" className="modal__label">
@@ -37,7 +63,8 @@ function RegisterModal({ onClose, isOpen, handleSubmit }) {
           id="password"
           placeholder="Password"
           name="password"
-          value={data.password}
+          value={password}
+          onChange={handlePasswordChange}
         />
       </label>
       <label htmlFor="name" className="modal__label">
@@ -48,10 +75,11 @@ function RegisterModal({ onClose, isOpen, handleSubmit }) {
           id="name"
           placeholder="Name"
           name="name"
-          value={data.name}
+          value={name}
+          onChange={handleNameChange}
         />
       </label>
-      <label htmlFor="avatarUrl" classNam="modal__label">
+      <label htmlFor="avatarUrl" className="modal__label">
         Avatar URL *
         <input
           type="link"
@@ -59,7 +87,8 @@ function RegisterModal({ onClose, isOpen, handleSubmit }) {
           id="avatarUrl"
           placeholder="Avatar URL"
           name="avatarUrl"
-          value={data.avatarUrl}
+          value={avatarUrl}
+          onChange={handleAvatarUrlChange}
         />
       </label>
       <label className="register__button-container">

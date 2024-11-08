@@ -9,6 +9,12 @@ function LoginModal({ onClose, isOpen, onSubmit }) {
   }
   const [email, setEmail] = useState("");
 
+  const [password, setPassword] = useState("");
+
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+  };
+
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
   };
@@ -18,14 +24,14 @@ function LoginModal({ onClose, isOpen, onSubmit }) {
 
   return (
     <ModalWithForm
-      title="Sign In"
-      buttonText="Sign In"
+      title="Log In"
+      buttonText="Log In"
       onClose={onClose}
       isOpen={isOpen}
       onSubmit={handleSubmit}
     >
       <label htmlFor="email" className="modal__label">
-        Email *
+        Email
         <input
           type="email"
           className="modal__input"
@@ -33,18 +39,19 @@ function LoginModal({ onClose, isOpen, onSubmit }) {
           placeholder="Email"
           name="email"
           value={email}
-          onchange={handleEmailChange}
+          onChange={handleEmailChange}
         />
       </label>
       <label htmlFor="password" className="modal__label">
-        Password *
+        Password
         <input
           type="password"
           className="modal__input"
           id="password"
-          placeholder="Email"
-          name="email"
+          placeholder="Password"
+          name="password"
           value={password}
+          onChange={handlePasswordChange}
         />
       </label>
     </ModalWithForm>

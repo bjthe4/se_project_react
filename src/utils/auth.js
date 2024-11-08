@@ -33,3 +33,5 @@ export function verifyUser(email, password, token) {
     },
   }).then(handleServerResponse);
 }
+
+// export default auth;

@@ -1,7 +1,14 @@
 import "./itemModal.css";
 import close from "../../assets/Union1.png";
 
-function ItemModal({ onClose, card, handleDeleteClick }) {
+function ItemModal({ onClose, card, handleDeleteClick, userData }) {
+  // Checking if the current user is the owner of the current clothing item
+  const isOwn = card.owner === userData._id;
+
+  // Creating a variable which you'll then set in `className` for the delete button
+  const modalDeleteBtnClassName = `modal__delete-btn ${
+    isOwn ? "modal__delete-btn_visible" : "modal__delete-btn_hidden"
+  }`;
   return (
     <div className="modal modal_opened">
       <div className="modal__content modal__content_type_image">
