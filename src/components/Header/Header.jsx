@@ -3,6 +3,8 @@ import headerLogo from "../../assets/Logo.svg";
 import avatar from "../../assets/Avatar.png";
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+// import { isLoggedIn } from "../App/App";
 
 function Header({
   handleAddClick,
@@ -11,12 +13,13 @@ function Header({
   handleAddRegistration,
   handleShowLogin,
 }) {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const currentDate = new Date().toLocaleString("default", {
     month: "long",
     day: "numeric",
   });
 
-  const myAvatar = userData.avatar || userData.name.charAt(0);
+  const myAvatar = userData?.avatar || userData?.name?.charAt(0);
   console.log(userData);
 
   return (
@@ -30,6 +33,27 @@ function Header({
 
       <div className="Header__user-container">
         <ToggleSwitch />
+        {!isLoggedIn ? (
+          <>
+            <button
+              type="button"
+              className="header__sign-up"
+              onClick={handleAddRegistration}
+            >
+              Sign Up
+            </button>
+
+            <button
+              type="button"
+              className="header__log-in"
+              onClick={handleShowLogin}
+            >
+              Log In
+            </button>
+          </>
+        ) : (
+          <p>USERNAME</p>
+        )}
         <div>
           {/* <button
             onClick={handleAddClick}
@@ -38,6 +62,8 @@ function Header({
           >
             + Add Clothes
           </button> */}
+
+          {/* will be needed for signout */}
           <button
             type="button"
             className="header__sign-up"

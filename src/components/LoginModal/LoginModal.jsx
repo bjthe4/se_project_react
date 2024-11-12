@@ -18,7 +18,8 @@ function LoginModal({ onClose, isOpen, onSubmit }) {
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
   };
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
     onSubmit({ email, password });
   };
 

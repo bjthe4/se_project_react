@@ -140,8 +140,9 @@ function App() {
       .signUp(email, password, name, avatarUrl)
       .then(() => {
         setUserData(email, password, name, avatarUrl);
-        setCurrentUser(email, password);
-        setIsLoggedIn(true);
+        // setCurrentUser(email, password);
+        // setIsLoggedIn(true);
+        handleLogin({ email, password });
         // e.preventDefault();
         closeActiveModal();
         navigate("/profile");
@@ -159,16 +160,16 @@ function App() {
         if (data.jwt) {
           localStorage.setItem("jwt", res.token);
         }
-        return <Navigate to="/login" replace />;
-      })
-      .then((data) => {
+        // return <Navigate to="/login" replace />;
         console.log("this is the data", data);
         setIsLoggedIn(true);
         // e.preventDefault();
         closeActiveModal();
         navigate("/profile");
       })
-      .catch(() => console.err("A login Error has occured", err));
+      // .then((data) => {
+      // })
+      .catch((err) => console.error("A login Error has occured", err));
   };
 
   const handleCardLike = ({ id, isLiked }) => {
@@ -196,6 +197,12 @@ function App() {
           })
           .catch((err) => console.log(err));
   };
+
+  useEffect(() => {
+    // check localstorage for a token
+    // if there
+    // send the getCurrentUser req
+  }, [isLoggedIn]);
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
