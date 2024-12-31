@@ -5,6 +5,8 @@ import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 // import { isLoggedIn } from "../App/App";
+import { CurrentUserContext } from "../../context/CurrentUserContext";
+import { useContext } from "react";
 
 function Header({
   handleAddClick,
@@ -21,6 +23,8 @@ function Header({
 
   const myAvatar = userData?.avatar || userData?.name?.charAt(0);
   console.log(userData);
+
+  const { avatar, email, name } = useContext(CurrentUserContext);
 
   return (
     <header className="header">
@@ -54,17 +58,16 @@ function Header({
         ) : (
           <p>USERNAME</p>
         )}
-        <div>
-          {/* <button
-            onClick={handleAddClick}
-            type="button"
-            className="header__add-clothes-btn"
-          >
-            + Add Clothes
-          </button> */}
 
-          {/* will be needed for signout */}
-          <button
+        <button
+          onClick={handleAddClick}
+          type="button"
+          className="header__add-clothes-btn"
+        >
+          + Add Clothes
+        </button>
+        {/* will be needed for signout */}
+        {/* <button
             type="button"
             className="header__sign-up"
             onClick={handleAddRegistration}
@@ -78,13 +81,12 @@ function Header({
             onClick={handleShowLogin}
           >
             Log In
-          </button>
-        </div>
+          </button> */}
 
-        {/* <p className="Header__username">Benedict Iroha</p>
         <Link to="/profile" className="header__link">
-          <img src={avatar} alt="Benedict Iroha" className="Header__avatar" />
-        </Link> */}
+          <p className="Header__username">Benedict Iroha</p>
+          <img src={avatar} alt="avatar" className="Header__avatar" />
+        </Link>
       </div>
     </header>
   );

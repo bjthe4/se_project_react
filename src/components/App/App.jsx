@@ -199,6 +199,21 @@ function App() {
   };
 
   useEffect(() => {
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      fetch("/api/getCurrentUser", {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`, // Use the token here
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data); // Handle the user data
+        })
+        .catch((err) => console.error("Error fetching user data:", err));
+    }
     // check localstorage for a token
     // if there
     // send the getCurrentUser req
@@ -250,7 +265,7 @@ function App() {
                   isLoggedIn ? (
                     <Navigate to="/" replace />
                   ) : (
-                    <Navigate to="/login" />
+                    <Navigate to="/login" replace />
                   )
                 }
               />

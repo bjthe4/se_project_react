@@ -4,13 +4,13 @@ const handleServerResponse = (res) => {
   return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
 };
 
-export function signUp(name, email, password, avatarURL) {
+export function signUp(email, password, name, avatarURL) {
   return fetch(`${baseURL}/signup`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ name, email, password, avatar: avatarURL }),
+    body: JSON.stringify({ email, password, name, avatar: avatarURL }),
   }).then(handleServerResponse);
 }
 
