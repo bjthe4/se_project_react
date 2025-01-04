@@ -56,6 +56,10 @@ function App() {
     setActiveModal("add-garment");
   };
 
+  const handleEditModal = () => {
+    setActiveModal("edit-profile");
+  };
+
   // const handleAddItemSubmit = (e) => {
   //   console.log(e);
   // };
@@ -157,8 +161,8 @@ function App() {
     auth
       .signIn(email, password)
       .then((data) => {
-        if (data.jwt) {
-          localStorage.setItem("jwt", res.token);
+        if (data.token) {
+          localStorage.setItem("jwt", data.token);
         }
         // return <Navigate to="/login" replace />;
         console.log("this is the data", data);
@@ -170,6 +174,15 @@ function App() {
       // .then((data) => {
       // })
       .catch((err) => console.error("A login Error has occured", err));
+  };
+
+  const handleSignOut = () => {
+    localStorage.removeItem("jwt");
+    console.log("signout");
+
+    setIsLoggedIn(false);
+    setCurrentUser({ email: "", password: "" });
+    navigate("/");
   };
 
   const handleCardLike = ({ id, isLiked }) => {
@@ -199,17 +212,17 @@ function App() {
   };
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    console.log("hello");
+    const token = localStorage.getItem("jwt");
 
     if (token) {
-      fetch("/api/getCurrentUser", {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${token}`, // Use the token here
-        },
-      })
-        .then((response) => response.json())
+      console.log("bye");
+      auth
+        .verifyUser(token)
+
         .then((data) => {
+          console.log("setCurrentUser");
+          setCurrentUser(data);
           console.log(data); // Handle the user data
         })
         .catch((err) => console.error("Error fetching user data:", err));
@@ -255,6 +268,8 @@ function App() {
                       handleCardClick={handleCardClick}
                       clothingItems={clothingItems}
                       handleAddClick={handleAddClick}
+                      handleSignOut={handleSignOut}
+                      handleEditModal={handleEditModal}
                     />
                   </ProtectedRoute>
                 }
@@ -303,6 +318,7 @@ function App() {
           />
           <EditProfileModal
             activeModal={EditProfileModal}
+            isOpen={activeModal === "edit-profile"}
             onClose={closeActiveModal}
             handleAddItem={handleAddItem}
           />

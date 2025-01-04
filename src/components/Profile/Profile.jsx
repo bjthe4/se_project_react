@@ -7,11 +7,16 @@ function Profile({
   handleCardClick,
   clothingItems,
   handleAddClick,
+  handleSignOut,
+  handleEditModal,
 }) {
   return (
     <div className="profile">
       <section className="profile__sidebar"></section>
-      <SideBar />
+      <SideBar
+        handleSignOut={handleSignOut}
+        handleEditModal={handleEditModal}
+      />
       <section className="profile__clothing-items"></section>
       <ClothesSection
         weatherData={weatherData}

@@ -11,7 +11,6 @@ import { useContext } from "react";
 function Header({
   handleAddClick,
   weatherData,
-  userData,
   handleAddRegistration,
   handleShowLogin,
 }) {
@@ -21,10 +20,15 @@ function Header({
     day: "numeric",
   });
 
-  const myAvatar = userData?.avatar || userData?.name?.charAt(0);
+  const userData = useContext(CurrentUserContext);
   console.log(userData);
 
-  const { avatar, email, name } = useContext(CurrentUserContext);
+  // userData?.avatar || userData?.name?.charAt(0);
+  const myAvatar = userData?.avatar || userData?.name?.charAt(0);
+
+  console.log(myAvatar);
+
+  const { avatar, email, name } = userData;
 
   return (
     <header className="header">
@@ -37,7 +41,7 @@ function Header({
 
       <div className="Header__user-container">
         <ToggleSwitch />
-        {!isLoggedIn ? (
+        {!myAvatar ? (
           <>
             <button
               type="button"
@@ -56,18 +60,17 @@ function Header({
             </button>
           </>
         ) : (
-          <p>USERNAME</p>
-        )}
-
-        <button
-          onClick={handleAddClick}
-          type="button"
-          className="header__add-clothes-btn"
-        >
-          + Add Clothes
-        </button>
-        {/* will be needed for signout */}
-        {/* <button
+          <>
+            <button
+              onClick={handleAddClick}
+              type="button"
+              className="header__add-clothes-btn"
+            >
+              {" "}
+              + Add Clothes
+            </button>
+            {/* will be needed for signout */}
+            {/* <button
             type="button"
             className="header__sign-up"
             onClick={handleAddRegistration}
@@ -83,10 +86,14 @@ function Header({
             Log In
           </button> */}
 
-        <Link to="/profile" className="header__link">
-          <p className="Header__username">Benedict Iroha</p>
-          <img src={avatar} alt="avatar" className="Header__avatar" />
-        </Link>
+            <Link to="/profile" className="header__link">
+              <div className="header__navbar">
+                <p className="Header__username">{name}</p>
+                <img src={myAvatar} alt="avatar" className="header__avatar" />
+              </div>
+            </Link>
+          </>
+        )}
       </div>
     </header>
   );

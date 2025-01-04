@@ -24,7 +24,7 @@ export function signIn(email, password) {
   }).then(handleServerResponse);
 }
 
-export function verifyUser(email, password, token) {
+export function verifyUser(token) {
   return fetch(`${baseURL}/users/me`, {
     method: "GET",
     headers: {
