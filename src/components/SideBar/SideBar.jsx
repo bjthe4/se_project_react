@@ -4,7 +4,7 @@ import { useContext } from "react";
 import { CurrentUserContext } from "../../context/CurrentUserContext";
 
 function SideBar({ handleSignOut, handleEditModal }) {
-  const currentUser = useContext(CurrentUserContext);
+  const { currentUser } = useContext(CurrentUserContext);
   return (
     <div className="sidebar">
       <img

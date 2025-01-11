@@ -3,7 +3,7 @@ import close from "../../assets/Union.png";
 
 function ModalWithForm({
   children,
-  buttonText,
+
   title,
   onClose,
   isOpened,
@@ -19,9 +19,6 @@ function ModalWithForm({
         </button>
         <form className="modal__form" onSubmit={onSubmit}>
           {children}
-          <button type="submit" className="modal__button">
-            {buttonText}
-          </button>
         </form>
       </div>
     </div>

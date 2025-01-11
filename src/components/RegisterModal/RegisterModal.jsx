@@ -2,8 +2,15 @@ import { useState } from "react";
 import "./RegisterModal.css";
 import { Link } from "react-router-dom";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
+import { Button } from "bootstrap";
 
-function RegisterModal({ onClose, isOpen, onSubmit }) {
+function RegisterModal({
+  onClose,
+  isOpen,
+  onSubmit,
+  handleShowLogin,
+  buttonText,
+}) {
   if (!isOpen) {
     return null;
   }
@@ -99,14 +106,24 @@ function RegisterModal({ onClose, isOpen, onSubmit }) {
         >
           Sign up
         </button> */}
-        <Link to="register" className="register__login-link">
+        {/* <Link to="register" className="register__login-link">
           Next
-        </Link>
+        </Link> */}
       </label>
       <label className="register__signIn">
-        <Link to="login" className="register__login-link">
+        {/* <Link to="login" className="register__login-link">
           or Log In
-        </Link>
+        </Link> */}
+        <button type="submit" className="register__signup">
+          Sign up
+        </button>
+        <button
+          className="register__login-link"
+          type="button"
+          onClick={handleShowLogin}
+        >
+          or Log In
+        </button>
       </label>
     </ModalWithForm>
   );

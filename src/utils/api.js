@@ -23,11 +23,12 @@ function removeItems(id, token) {
   }).then(handleServerResponse);
 }
 
-function addItems(name, weather, imageUrl) {
+function addItems(name, weather, imageUrl, token) {
   return fetch(`${baseURL}/items`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
     },
     body: JSON.stringify({
       name,
@@ -37,10 +38,32 @@ function addItems(name, weather, imageUrl) {
   }).then(handleServerResponse);
 }
 
+function addCardLike(id, token) {
+  return fetch(`${baseURL}/items/${id}/likes`, {
+    method: "PUT",
+    headers: {
+      "Content-type": "application/json",
+      authorization: `Bearer ${token}`,
+    },
+  }).then(handleServerResponse);
+}
+
+function removeCardLike(id, token) {
+  return fetch(`${baseURL}/items/${id}/likes`, {
+    method: "DELETE",
+    headers: {
+      "Content-type": "application/json",
+      authorization: `Bearer ${token}`,
+    },
+  }).then(handleServerResponse);
+}
+
 const api = {
   getItems,
   removeItems,
   addItems,
+  addCardLike,
+  removeCardLike,
 };
 
 export default api;

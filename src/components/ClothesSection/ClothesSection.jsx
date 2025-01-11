@@ -2,7 +2,12 @@
 import ItemCard from "../ItemCard/ItemCard.jsx";
 import "./ClothesSection.css";
 
-function ClothesSection({ handleCardClick, clothingItems, handleAddClick }) {
+function ClothesSection({
+  handleCardClick,
+  clothingItems,
+  handleAddClick,
+  handleCardLike,
+}) {
   //Checking if the current user is the owner of the current clothing item
   // const isOwn = selectedCard.owner === currentUser._id;
 
@@ -24,6 +29,7 @@ function ClothesSection({ handleCardClick, clothingItems, handleAddClick }) {
       <ul className="clothes-section-items">
         {clothingItems
           // .filter((item) => {
+          //   console.log(item);
           //   return item.weather === weatherData.type;
           // })
           .map((item) => {
@@ -32,6 +38,8 @@ function ClothesSection({ handleCardClick, clothingItems, handleAddClick }) {
                 key={item._id}
                 item={item}
                 onCardClick={handleCardClick}
+                onCardLike={handleCardLike}
+                onCardRemoveLike={handleCardLike}
               />
             );
           })}

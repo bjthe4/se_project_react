@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
+import "./AddItemModal.css";
 
 function AddItemModal({
   closeActiveModal,
@@ -11,13 +12,11 @@ function AddItemModal({
 }) {
   const [name, setName] = useState("");
   const handleNameChange = (e) => {
-    console.log(e.target.value);
     setName(e.target.value);
   };
 
   const [link, setUrl] = useState("");
   const handleUrlChange = (e) => {
-    console.log(e.target.value);
     setUrl(e.target.value);
   };
 
@@ -113,6 +112,7 @@ function AddItemModal({
           Cold
         </label>
       </fieldset>
+      <button className="modal__button">Add garment</button>
     </ModalWithForm>
   );
 }

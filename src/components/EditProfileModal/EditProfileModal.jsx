@@ -1,15 +1,30 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./EditProfileModal.css";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import { CurrentUserContext } from "../../context/CurrentUserContext";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 
 function EditProfileModal({ onClose, isOpen, handleSubmit }) {
+  const [name, setName] = useState("");
+  const [avatar, setAvatar] = useState("");
+  const handleNameChange = (e) => {
+    // console.log(e.target.value);
+    setName(e.target.value);
+  };
+  const handleAvatarChange = (e) => {
+    // console.log(e.target.value);
+    setAvatar(e.target.value);
+  };
+  const { currentUser } = useContext(CurrentUserContext);
+
+  useEffect(() => {
+    setName(currentUser.name);
+    setAvatar(currentUser.avatar);
+  }, [isOpen]);
+
   if (!isOpen) {
     return null;
   }
-  const { name, avatar } = useContext(CurrentUserContext);
-
   return (
     <ModalWithForm
       title="Change profile Data"
@@ -27,6 +42,7 @@ function EditProfileModal({ onClose, isOpen, handleSubmit }) {
           placeholder="name"
           name="name"
           value={name}
+          onChange={handleNameChange}
         />
       </label>
       <label htmlFor="avatarUrl" className="modal__label">
@@ -38,6 +54,7 @@ function EditProfileModal({ onClose, isOpen, handleSubmit }) {
           placeholder="Avatar URL"
           name="avatarUrl"
           value={avatar}
+          onChange={handleAvatarChange}
         />
       </label>
     </ModalWithForm>

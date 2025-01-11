@@ -9,9 +9,10 @@ function Main({
   weatherData,
   handleCardClick,
   clothingItems,
-  onCardLike,
+  handleCardLike,
 }) /*clothingItems delete handleCardClick, delete defaultClothingItems*/ {
   const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
+  // console.log(handleCardLike);
   return (
     <main>
       <WeatherCard weatherData={weatherData} />
@@ -23,6 +24,7 @@ function Main({
         <ul className="cards__list">
           {clothingItems
             .filter((item) => {
+              // console.log(item);
               return item.weather === weatherData.type;
             })
             .map((item) => {
@@ -31,7 +33,8 @@ function Main({
                   key={item._id}
                   item={item}
                   onCardClick={handleCardClick}
-                  onCardLike={onCardLike}
+                  onCardLike={handleCardLike}
+                  onCardRemoveLike={handleCardLike}
                 />
               );
             })}

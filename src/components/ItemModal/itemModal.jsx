@@ -1,9 +1,12 @@
 import "./itemModal.css";
 import close from "../../assets/Union1.png";
+import { useContext } from "react";
+import { CurrentUserContext } from "../../context/CurrentUserContext";
 
 function ItemModal({ onClose, card, handleDeleteClick, userData }) {
   // Checking if the current user is the owner of the current clothing item
-  const isOwn = card.owner === userData._id;
+  const { currentUser } = useContext(CurrentUserContext);
+  const isOwn = card.owner === currentUser._id;
 
   // Creating a variable which you'll then set in `className` for the delete button
   const modalDeleteBtnClassName = `modal__delete-btn ${
@@ -29,7 +32,7 @@ function ItemModal({ onClose, card, handleDeleteClick, userData }) {
           <p className="modal__weather">Weather: {card.weather}</p>
         </div>
         <button
-          className="modal__delete-item-button"
+          className={modalDeleteBtnClassName}
           onClick={() => {
             handleDeleteClick(card);
           }}

@@ -36,7 +36,13 @@ function App() {
   const [clothingItems, setClothingItems] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [currentUser, setCurrentUser] = useState({ email: "", password: "" });
+  const [currentUser, setCurrentUser] = useState({
+    email: "",
+    password: "",
+    name: "",
+    avatar: "",
+    _id: "",
+  });
   const [userData, setUserData] = useState({
     email: "",
     password: "",
@@ -73,7 +79,6 @@ function App() {
   };
 
   const handleShowLogin = () => {
-    console.log("is this code working");
     setActiveModal("login-modal");
   };
 
@@ -84,9 +89,8 @@ function App() {
   */
 
   const handleAddItem = ({ name, weather, imageUrl }) => {
-    console.log(name, weather, imageUrl);
     api
-      .addItems(name, weather, imageUrl)
+      .addItems(name, weather, imageUrl, localStorage.getItem("jwt"))
       .then((newItem) => {
         setClothingItems([newItem, ...clothingItems]);
 
@@ -121,19 +125,19 @@ function App() {
     getWeather(coordinates, APIkey)
       .then((data) => {
         const filteredData = filterWeatherData(data);
-        console.log(filteredData);
+        // console.log(filteredData);
         setWeatherData(filteredData);
       })
       .catch(console.error);
   }, []);
 
-  console.log(currentTemperatureUnit);
+  // console.log(currentTemperatureUnit);
 
   useEffect(() => {
     api
       .getItems()
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         setClothingItems(data);
       })
       .catch(console.error);
@@ -165,8 +169,10 @@ function App() {
           localStorage.setItem("jwt", data.token);
         }
         // return <Navigate to="/login" replace />;
-        console.log("this is the data", data);
+        // console.log("this is the data", data);
+
         setIsLoggedIn(true);
+        setCurrentUser(data.user);
         // e.preventDefault();
         closeActiveModal();
         navigate("/profile");
@@ -178,51 +184,59 @@ function App() {
 
   const handleSignOut = () => {
     localStorage.removeItem("jwt");
-    console.log("signout");
+    // console.log("signout");
 
     setIsLoggedIn(false);
     setCurrentUser({ email: "", password: "" });
     navigate("/");
   };
 
-  const handleCardLike = ({ id, isLiked }) => {
+  // console.log(currentUser);
+  const handleCardLike = ({ _id, likes }) => {
+    // console.log(_id);
+    // console.log(isLiked);
+    // there is no isLiked, you have just likes array, you need to check is there in this array an owner ID
+
     const token = localStorage.getItem("jwt");
     // Check if this card is not currently liked
-    !isLiked
+    const isLiked = likes.some((like) => like === currentUser._id);
+
+    !isLiked && isLoggedIn
       ? // if so, send a request to add the user's id to the card's likes array
         api
           // the first argument is the card's id
-          .addCardLike(id, token)
+          .addCardLike(_id, token)
           .then((updatedCard) => {
             setClothingItems((cards) =>
-              cards.map((item) => (item._id === id ? updatedCard : item))
+              cards.map((item) => (item._id === _id ? updatedCard : item))
             );
           })
           .catch((err) => console.log(err))
       : // if not, send a request to remove the user's id from the card's likes array
         api
           // the first argument is the card's id
-          .removeCardLike(id, token)
+          .removeCardLike(_id, token)
           .then((updatedCard) => {
             setClothingItems((cards) =>
-              cards.map((item) => (item._id === id ? updatedCard : item))
+              cards.map((item) => (item._id === _id ? updatedCard : item))
             );
           })
           .catch((err) => console.log(err));
   };
 
   useEffect(() => {
-    console.log("hello");
+    // console.log("hello");
     const token = localStorage.getItem("jwt");
 
     if (token) {
-      console.log("bye");
+      // console.log("bye");
       auth
         .verifyUser(token)
 
         .then((data) => {
-          console.log("setCurrentUser");
+          // console.log("setCurrentUser");
           setCurrentUser(data);
+          setIsLoggedIn(true);
           console.log(data); // Handle the user data
         })
         .catch((err) => console.error("Error fetching user data:", err));
@@ -230,10 +244,10 @@ function App() {
     // check localstorage for a token
     // if there
     // send the getCurrentUser req
-  }, [isLoggedIn]);
+  }, []);
 
   return (
-    <CurrentUserContext.Provider value={currentUser}>
+    <CurrentUserContext.Provider value={{ currentUser, isLoggedIn }}>
       <div className="page">
         <CurrentTemperatureUnitContext.Provider
           value={{ currentTemperatureUnit, handleToggleSwitchChange }}
@@ -256,6 +270,7 @@ function App() {
                     handleCardClick={handleCardClick}
                     clothingItems={clothingItems}
                     handleCardLike={handleCardLike}
+                    handleDeleteClick={handleDeleteItem}
                   />
                 }
               />
@@ -270,6 +285,8 @@ function App() {
                       handleAddClick={handleAddClick}
                       handleSignOut={handleSignOut}
                       handleEditModal={handleEditModal}
+                      handleCardLike={handleCardLike}
+                      // handleDeleteClick={handleDeleteItem}
                     />
                   </ProtectedRoute>
                 }
@@ -310,11 +327,13 @@ function App() {
             isOpen={activeModal === "registration-modal"}
             onClose={closeActiveModal}
             onSubmit={handleRegistration}
+            handleShowLogin={handleShowLogin}
           />
           <LoginModal
             isOpen={activeModal === "login-modal"}
             onClose={closeActiveModal}
             onSubmit={handleLogin}
+            handleAddRegistration={handleAddRegistration}
           />
           <EditProfileModal
             activeModal={EditProfileModal}
