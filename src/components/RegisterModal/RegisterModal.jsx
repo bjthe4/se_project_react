@@ -1,8 +1,8 @@
 import { useState } from "react";
 import "./RegisterModal.css";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
-import { Button } from "bootstrap";
+// import { Button } from "bootstrap";
 
 function RegisterModal({
   onClose,
