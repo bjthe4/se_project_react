@@ -25,8 +25,8 @@ function ItemCard({ item, onCardClick, onCardLike, onCardRemoveLike }) {
   // The likes array should be an array of ids
 
   // are we on profile page? if so - heart icon always exist, if not - use the condition below
-  const isLiked = item.likes.some((id) => id === currentUser._id);
-  console.log(isLiked);
+  const isLiked = item.likes.some((_id) => _id === currentUser._id);
+  console.log();
 
   return (
     <li className="card">
