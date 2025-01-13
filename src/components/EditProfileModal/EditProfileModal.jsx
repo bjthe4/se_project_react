@@ -4,13 +4,19 @@ import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import { CurrentUserContext } from "../../context/CurrentUserContext";
 import { useContext, useState } from "react";
 
-function EditProfileModal({ onClose, isOpen, handleSubmit }) {
+function EditProfileModal({ onClose, isOpen, onEditProfileSubmit }) {
   const [name, setName] = useState("");
   const [avatar, setAvatar] = useState("");
   const handleNameChange = (e) => {
     // console.log(e.target.value);
     setName(e.target.value);
   };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onEditProfileSubmit(name, avatar);
+  };
+
   const handleAvatarChange = (e) => {
     // console.log(e.target.value);
     setAvatar(e.target.value);
@@ -31,7 +37,7 @@ function EditProfileModal({ onClose, isOpen, handleSubmit }) {
       buttonText="save changes"
       onClose={onClose}
       isOpen={isOpen}
-      handleSubmit={handleSubmit}
+      onSubmit={handleSubmit}
     >
       <label htmlFor="name" className="modal__label">
         Name *
@@ -57,7 +63,11 @@ function EditProfileModal({ onClose, isOpen, handleSubmit }) {
           onChange={handleAvatarChange}
         />
       </label>
-      <button type="submit" className="edit__modal-save">
+      <button
+        type="submit"
+        className="edit__modal-save"
+        onSubmit={handleSubmit}
+      >
         Save changes
       </button>
     </ModalWithForm>

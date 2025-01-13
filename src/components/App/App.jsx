@@ -82,6 +82,16 @@ function App() {
     setActiveModal("login-modal");
   };
 
+  const handleEditProfileSubmit = (name, avatarURl) => {
+    api
+      .editData(name, avatarURl, localStorage.getItem("jwt"))
+      .then((user) => {
+        //setUserData(name, avatarURl);
+        setCurrentUser(user);
+        closeActiveModal();
+      })
+      .catch((err) => console.log(err));
+  };
   /*
   const onAddItem = (values) => {
     console.log(values);
@@ -93,12 +103,12 @@ function App() {
       .addItems(name, weather, imageUrl, localStorage.getItem("jwt"))
       .then((newItem) => {
         setClothingItems([newItem, ...clothingItems]);
-
+        console.log(newItem, clothingItems);
         closeActiveModal();
       })
       .catch((err) => console.log(err));
   };
-
+  console.log(clothingItems);
   const handleToggleSwitchChange = () => {
     if (currentTemperatureUnit === "C") setcurrentTemperatureUnit("F");
     if (currentTemperatureUnit === "F") setcurrentTemperatureUnit("C");
@@ -165,6 +175,7 @@ function App() {
     auth
       .signIn(email, password)
       .then((data) => {
+        console.log(data);
         if (data.token) {
           localStorage.setItem("jwt", data.token);
         }
@@ -244,7 +255,7 @@ function App() {
     // check localstorage for a token
     // if there
     // send the getCurrentUser req
-  }, []);
+  }, [isLoggedIn]);
 
   return (
     <CurrentUserContext.Provider value={{ currentUser, isLoggedIn }}>
@@ -340,6 +351,7 @@ function App() {
             isOpen={activeModal === "edit-profile"}
             onClose={closeActiveModal}
             handleAddItem={handleAddItem}
+            onEditProfileSubmit={handleEditProfileSubmit}
           />
         </CurrentTemperatureUnitContext.Provider>
       </div>

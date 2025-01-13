@@ -58,12 +58,27 @@ function removeCardLike(id, token) {
   }).then(handleServerResponse);
 }
 
+function editData(name, avatarURl, token) {
+  return fetch(`${baseURL}/users/me`, {
+    method: "PATCH",
+    headers: {
+      "Content-type": "application/json",
+      authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({
+      name,
+      avatarURl,
+    }),
+  }).then(handleServerResponse);
+}
+
 const api = {
   getItems,
   removeItems,
   addItems,
   addCardLike,
   removeCardLike,
+  editData,
 };
 
 export default api;

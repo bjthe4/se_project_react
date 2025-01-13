@@ -21,13 +21,13 @@ function Header({
 
   const { currentUser: userData, isLoggedIn } = useContext(CurrentUserContext);
   // console.log(userData);
-  console.log(userData);
+
   // userData?.avatar || userData?.name?.charAt(0);
   const myAvatar = userData?.avatar || userData?.name?.charAt(0);
 
   // console.log(myAvatar);
 
-  const { avatar, email, name } = userData;
+  const { name } = userData;
 
   return (
     <header className="header">
