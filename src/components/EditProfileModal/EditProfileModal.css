@@ -1,0 +1,10 @@
+.edit__modal-save {
+  font-weight: 700;
+  width: 128px;
+  height: 36px;
+  background-color: #0000004d;
+  color: #fff;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+}

@@ -57,6 +57,9 @@ function EditProfileModal({ onClose, isOpen, handleSubmit }) {
           onChange={handleAvatarChange}
         />
       </label>
+      <button type="submit" className="edit__modal-save">
+        Save changes
+      </button>
     </ModalWithForm>
   );
 }

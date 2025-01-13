@@ -1,3 +1,4 @@
+import { useContext } from "react";
 import "./Header.css";
 import headerLogo from "../../assets/Logo.svg";
 import avatar from "../../assets/Avatar.png";
@@ -6,7 +7,6 @@ import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 // import { isLoggedIn } from "../App/App";
 import { CurrentUserContext } from "../../context/CurrentUserContext";
-import { useContext } from "react";
 
 function Header({
   handleAddClick,
@@ -21,7 +21,7 @@ function Header({
 
   const { currentUser: userData, isLoggedIn } = useContext(CurrentUserContext);
   // console.log(userData);
-
+  console.log(userData);
   // userData?.avatar || userData?.name?.charAt(0);
   const myAvatar = userData?.avatar || userData?.name?.charAt(0);
 

@@ -42,6 +42,7 @@ function App() {
     name: "",
     avatar: "",
     _id: "",
+    token: "",
   });
   const [userData, setUserData] = useState({
     email: "",
@@ -49,7 +50,6 @@ function App() {
     name: "",
     avatarUrl: "",
   });
-
   const navigate = useNavigate();
 
   const handleCardClick = (card) => {

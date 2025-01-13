@@ -3,7 +3,13 @@ import "./LoginModal.css";
 import { Link } from "react-router-dom";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
-function LoginModal({ onClose, isOpen, onSubmit, handleAddRegistration }) {
+function LoginModal({
+  onClose,
+  isOpen,
+  onSubmit,
+  handleAddRegistration,
+  handleShowLogin,
+}) {
   if (!isOpen) {
     return null;
   }
@@ -56,7 +62,11 @@ function LoginModal({ onClose, isOpen, onSubmit, handleAddRegistration }) {
         />
       </label>
       <div className="login__modal">
-        <button type="submit" className="login__button-modal">
+        <button
+          type="submit"
+          className="login__button-modal"
+          onClick={handleShowLogin}
+        >
           Log In
         </button>
         <button
