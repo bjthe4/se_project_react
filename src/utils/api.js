@@ -66,8 +66,8 @@ function editData(name, avatarURl, token) {
       authorization: `Bearer ${token}`,
     },
     body: JSON.stringify({
-      name,
-      avatarURl,
+      name: name,
+      avatar: avatarURl,
     }),
   }).then(handleServerResponse);
 }

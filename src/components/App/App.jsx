@@ -48,7 +48,7 @@ function App() {
     email: "",
     password: "",
     name: "",
-    avatarUrl: "",
+    avatarURl: "",
   });
   const navigate = useNavigate();
 
@@ -86,7 +86,11 @@ function App() {
     api
       .editData(name, avatarURl, localStorage.getItem("jwt"))
       .then((user) => {
-        //setUserData(name, avatarURl);
+        setUserData({
+          ...userData,
+          name: user.name || name,
+          avatarURl: user.avatarURl || avatarURl,
+        });
         setCurrentUser(user);
         closeActiveModal();
       })
