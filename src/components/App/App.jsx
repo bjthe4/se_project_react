@@ -18,7 +18,7 @@ import RegisterModal from "../RegisterModal/RegisterModal";
 // import { getItems } from "../../utils/api";
 // import { removeItems } from "../../utils/api";
 import api from "../../utils/api";
-import ProtectedRoute from "../../utils/ProtectedRoute";
+import ProtectedRoute from "../../ProtectedRoutes/ProtectedRoute";
 import LoginModal from "../LoginModal/LoginModal";
 import { CurrentUserContext } from "../../context/CurrentUserContext";
 import EditProfileModal from "../EditProfileModal/EditProfileModal";

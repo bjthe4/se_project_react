@@ -72,7 +72,7 @@ function LoginModal({
         <button
           type="submit"
           className="signup__button-modal"
-          onClick={handleAddRegistration}
+          // onClick={handleAddRegistration}
         >
           Or Sign up
         </button>
