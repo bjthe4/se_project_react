@@ -51,12 +51,12 @@ function AddItemModal({
       isOpen={isOpen}
       onSubmit={handleSubmit}
     >
-      <label htmlFor="name" className="modal__label">
+      <label htmlFor="label" className="modal__label">
         Name
         <input
           type="text"
           className="modal__input"
-          id="name"
+          id="label"
           placeholder="Name"
           value={name}
           onChange={handleNameChange}

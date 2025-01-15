@@ -39,12 +39,12 @@ function EditProfileModal({ onClose, isOpen, onEditProfileSubmit }) {
       isOpen={isOpen}
       onSubmit={handleSubmit}
     >
-      <label htmlFor="name" className="modal__label">
+      <label htmlFor="title" className="modal__label">
         Name *
         <input
           type="name"
           className="modal__input"
-          id="name"
+          id="title"
           placeholder="name"
           name="name"
           value={name}

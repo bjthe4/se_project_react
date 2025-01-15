@@ -114,7 +114,7 @@ function RegisterModal({
         {/* <Link to="login" className="register__login-link">
           or Log In
         </Link> */}
-        <button type="submit" className="register__signup">
+        <button type="button" className="register__signup">
           Sign up
         </button>
         <button
