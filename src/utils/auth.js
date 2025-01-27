@@ -1,9 +1,9 @@
 import { handleServerResponse } from "../utils/api";
 
-const baseURL = "http://localhost:3001";
+import { BASE_URL } from "../utils/constants";
 
 export function signUp(email, password, name, avatarURL) {
-  return fetch(`${baseURL}/signup`, {
+  return fetch(`${BASE_URL}/signup`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -13,7 +13,7 @@ export function signUp(email, password, name, avatarURL) {
 }
 
 export function signIn(email, password) {
-  return fetch(`${baseURL}/signin`, {
+  return fetch(`${BASE_URL}/signin`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -23,7 +23,7 @@ export function signIn(email, password) {
 }
 
 export function verifyUser(token) {
-  return fetch(`${baseURL}/users/me`, {
+  return fetch(`${BASE_URL}/users/me`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",

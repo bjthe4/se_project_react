@@ -50,6 +50,7 @@ function App() {
     name: "",
     avatarURl: "",
   });
+
   const navigate = useNavigate();
 
   const handleCardClick = (card) => {

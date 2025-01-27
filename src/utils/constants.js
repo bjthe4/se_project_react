@@ -96,8 +96,15 @@ export const defaultClothingItems = [
   },
 ];
 
+const BASE_URL =
+  process.env.NODE_ENV === "production"
+    ? "https://api.gcpp.demo.blinklab.com"
+    : "http://localhost:3001";
+
 export const coordinates = {
   latitude: 32.776665,
   longitude: -96.796989,
 };
 export const APIkey = "6e01e991c59b46a3b46a2bbf309d038e";
+
+export { BASE_URL };

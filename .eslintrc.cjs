@@ -18,6 +18,7 @@ module.exports = {
       { allowConstantExport: true },
     ],
     "react/prop-types": 0,
+    "no-unused-vars": ["error", { argsIgnorePattern: "next" }],
   },
 
   // Add an overrides array. Without this, ESLint could only be run via
