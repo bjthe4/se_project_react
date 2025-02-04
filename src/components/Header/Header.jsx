@@ -1,10 +1,10 @@
 import { useContext } from "react";
 import "./Header.css";
 import headerLogo from "../../assets/Logo.svg";
-import avatar from "../../assets/Avatar.png";
+// import avatar from "../../assets/Avatar.png";
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+// import { useState, useEffect } from "react";
 // import { isLoggedIn } from "../App/App";
 import { CurrentUserContext } from "../../context/CurrentUserContext";
 

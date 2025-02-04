@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./LoginModal.css";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
 function LoginModal({
@@ -10,12 +10,13 @@ function LoginModal({
   handleAddRegistration,
   handleShowLogin,
 }) {
-  if (!isOpen) {
-    return null;
-  }
   const [email, setEmail] = useState("");
 
   const [password, setPassword] = useState("");
+
+  if (!isOpen) {
+    return null;
+  }
 
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);

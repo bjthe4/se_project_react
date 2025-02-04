@@ -4,17 +4,7 @@ import "./RegisterModal.css";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 // import { Button } from "bootstrap";
 
-function RegisterModal({
-  onClose,
-  isOpen,
-  onSubmit,
-  handleShowLogin,
-  buttonText,
-}) {
-  if (!isOpen) {
-    return null;
-  }
-
+function RegisterModal({ onClose, isOpen, onSubmit, handleShowLogin }) {
   const [email, setEmail] = useState("");
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -35,12 +25,17 @@ function RegisterModal({
     setAvatarUrl(e.target.value);
   };
 
+  if (!isOpen) {
+    return null;
+  }
+
   const handleSubmitRegisteration = (e) => {
+    console.log("asf");
     e.preventDefault();
     onSubmit({ email, password, name, avatarUrl });
   };
 
-  const [data, setData] = useState("");
+  // const [data, setData] = useState("");
 
   return (
     <ModalWithForm
@@ -114,7 +109,7 @@ function RegisterModal({
         {/* <Link to="login" className="register__login-link">
           or Log In
         </Link> */}
-        <button type="button" className="register__signup">
+        <button type="submit" className="register__signup">
           Sign up
         </button>
         <button

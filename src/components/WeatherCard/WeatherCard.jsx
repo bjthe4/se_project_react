@@ -1,6 +1,6 @@
-import React from "react";
+// import React from "react";
 import "./WeatherCard.css";
-import Cloudy from "../../assets/day/Cloudy.png";
+// import Cloudy from "../../assets/day/Cloudy.png";
 import { weatherOptions, defaultWeatherOptions } from "../../utils/constants";
 import { useContext } from "react";
 import { CurrentTemperatureUnitContext } from "../../context/CurrentTemperatureUnitContext";

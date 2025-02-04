@@ -6,7 +6,6 @@ function ModalWithForm({
 
   title,
   onClose,
-  isOpened,
   isOpen,
   onSubmit,
 }) {

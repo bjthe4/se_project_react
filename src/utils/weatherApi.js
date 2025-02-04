@@ -12,7 +12,7 @@ export const filterWeatherData = (data) => {
       C: Math.round(((data.main.temp - 32) * 5) / 9),
     },
   };
-  const weather = {};
+
   // console.log(weather);
   result.city = data.name;
   /*result.temp = { F: data.main.temp };*/

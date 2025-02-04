@@ -13,7 +13,6 @@ import { getWeather, filterWeatherData } from "../../utils/weatherApi";
 import Footer from "../Footer/Footer";
 import { CurrentTemperatureUnitContext } from "../../context/CurrentTemperatureUnitContext";
 import AddItemModal from "../AddItemsModal/AddItemModal";
-import loginModal from "../LoginModal/LoginModal";
 import RegisterModal from "../RegisterModal/RegisterModal";
 // import { getItems } from "../../utils/api";
 // import { removeItems } from "../../utils/api";
@@ -34,7 +33,7 @@ function App() {
   const [selectedCard, setSelectedCard] = useState({});
   const [currentTemperatureUnit, setcurrentTemperatureUnit] = useState("F");
   const [clothingItems, setClothingItems] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  // const [isLoading, setIsLoading] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({
     email: "",
@@ -119,10 +118,10 @@ function App() {
     if (currentTemperatureUnit === "F") setcurrentTemperatureUnit("C");
   };
 
-  const handleDeleteClick = (card) => {
-    setActiveModal("delete-item");
-    setSelectedCard(card);
-  };
+  // const handleDeleteClick = (card) => {
+  //   setActiveModal("delete-item");
+  //   setSelectedCard(card);
+  // };
 
   const handleDeleteItem = (item) => {
     // handleDeleteClick();
